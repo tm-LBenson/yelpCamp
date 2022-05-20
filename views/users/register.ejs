@@ -1,0 +1,43 @@
+<%- layout ('layouts/boilerplate') %>
+    <div class="row">
+        <h1 class="text-center">Register</h1>
+        <div class="col-6 offset-3">
+            <form novalidate class="needs-validation" method="post" action="">
+                <div class="mb-3">
+                    <label class="form-label" for="username">Username:</label>
+                    <input required class="form-control" type="text" name="username" id="username"
+                        placeholder="Username">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Username is required!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="email">Email:</label>
+                    <input required class="form-control" type="email" name="email" id="email"
+                        placeholder="Email@mail.com">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Email is required!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="password">Password:</label>
+                    <input required class="form-control" type="password" name="password" id="password" placeholder="">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Password is required!
+                    </div>
+                </div>
+
+                <button class="btn btn-lg btn-success">Register</button>
+        </div>
+        </form>
+    </div>
+    </div>

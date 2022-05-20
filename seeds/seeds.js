@@ -31,15 +31,36 @@ const sample = array => array[Math.floor(Math.random() * array.length)];
 const slash = "/"
 const seedDB = async () => {
     await CampgroundM.deleteMany({});
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 300; i++) {
         const random1000 = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 100 + 10);
         const camp = new CampgroundM({
+            author: '628539bb0a4a0e0ce5a8fdb1',
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
-            image: `${pics[i + 1]}`,
             description: `Beautiful campground! You can sleep under the stars with a beautiful view. The trees are lovely and give an amazing feeling. There are plenty of things to see in nature, and many trails to explore. The hiking trails can take you down by the water, or up in the mountains of mist. The sunsets on this campground are an incredible site`,
-            price: price
+            price: price,
+            geometry: {
+                type: 'Point',
+                coordinates: [
+                    cities[random1000].longitude,
+                    cities[random1000].latitude
+                ]
+         },
+            image: [
+                {
+                    url: `${pics[i + 1]}`,
+                    filename: `jklsjfdlks${i + 1}`
+                },
+                {
+                    url: `${pics[i + 3]}`,
+                    filename: `jklsjfdlks${i + 3}`
+                },
+                {
+                    url: `${pics[i + 6]}`,
+                    filename: `jklsjfdlks${i + 4}`
+                },
+            ]
         })
         await camp.save();
     }

@@ -48,10 +48,11 @@ module.exports.editCampSubmit = async (req, res) => {
     const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }))
     campground.image.push(...imgs);
     await campground.save()
-    for (let filename of req.body.deleteImages) {
-        await cloudinary.uploader.destroy(filename);
-    }
     if (req.body.deleteImages) {
+        for (let filename of req.body.deleteImages) {
+            await cloudinary.uploader.destroy(filename);
+        }
+
         await campground.updateOne({ $pull: { image: { filename: { $in: req.body.deleteImages } } } })
     }
 

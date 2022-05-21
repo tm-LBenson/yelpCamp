@@ -6,6 +6,8 @@ center: [-103.5917, 40.6699],
 zoom: 3
 });
 
+// disable scroll to zoom
+map.scrollZoom.disable();
 // add zoom and rotation controls to the map
 map.addControl(new mapboxgl.NavigationControl());
  

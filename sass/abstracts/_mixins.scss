@@ -1,0 +1,135 @@
+// needed when all elements in a parent are floated, making the parent element have a height of 0px
+@mixin clearfix {
+    &::after {
+        // sudo elements require content, even an empty string to exist
+        content: "";
+        // conventenial way to display the clearfix
+        display: table;
+        // clear both float left and float right from the sudo elements, which then holds open the parent element
+        clear: both;
+    }
+}
+
+@mixin greenBackground {
+    background-color: $color-light-green;
+}
+
+@mixin grayBackground {
+    background-color: $color-soft-gray;
+    color: $color-font-graybg;
+}
+
+@mixin clipBottom {
+    clip-path: polygon(0 0%, 100% 0, 100% 85%, 0 100%);
+}
+
+@mixin clipTop {
+    clip-path: polygon(0 17vh, 100% 0%, 100% 100%, 0 100%);
+}
+
+@mixin heroPic {
+    background-image:
+        linear-gradient(to right bottom, rgba(115, 117, 131, 0.442), rgba(42, 14, 127, 0.401)),
+        url("grassyhill.jpg");
+    background-size: cover;
+    background-position: top;
+}
+
+@mixin centeredContainer {
+    width: 33%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+@mixin textGradient {
+    display: inline-block;
+    background-image: linear-gradient(to right, red, blue);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+// MEDIA QUERY
+// $grid-breakpoints: (
+//   xs: 0,
+//   sm: 576px,
+//   md: 768px,
+//   lg: 992px,
+//   xl: 1200px,
+//   xxl: 1400px
+// );
+
+@mixin respondY($breakpoint) {
+    @if $breakpoint ==sh {
+        @media(min-height: 52em) {
+            @content
+        }
+    }
+
+    ;
+}
+
+@mixin respond ($breakpoint) {
+
+    @if $breakpoint ==sm {
+        @media (max-width: 12.5em) {
+            @content
+        }
+
+        ;
+    }
+
+    @if $breakpoint ==sm {
+        @media (max-width: 36em) {
+            @content
+        }
+
+        ;
+    }
+
+    @if $breakpoint ==md {
+        @media (max-width: 48em) {
+            @content
+        }
+
+        ;
+    }
+
+    @if $breakpoint ==lg {
+        @media (max-width: 62em) {
+            @content
+        }
+
+        ;
+
+
+    }
+
+    @if $breakpoint ==xl {
+        @media (max-width: 75em) {
+            @content
+        }
+
+        ;
+
+
+    }
+
+    @if $breakpoint ==xxl {
+        @media (max-width: 87.5em) {
+            @content
+        }
+
+        ;
+    }
+
+    @if $breakpoint ==full {
+        @media (min-width: 88.5em) {
+            @content
+        }
+
+        ;
+
+
+    }
+}

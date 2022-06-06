@@ -1,0 +1,34 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    box-sizing: inherit;
+    padding: 0;
+}
+
+// MEDIA QUERY
+// $grid-breakpoints: (
+//   xs: 0,
+//   sm: 576px,
+//   md: 768px,
+//   lg: 992px,
+//   xl: 1200px,
+//   xxl: 1400px
+// );
+
+html {
+    font-size: 62.5%; // 1 rem = 10px | 10/16 = 62.5
+    width: 100vw;
+
+
+}
+
+
+body {
+    box-sizing: border-box;
+    background-color: $color-soft-gray;
+
+    border-top: 0;
+    border-bottom: 0;
+
+}

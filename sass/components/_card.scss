@@ -1,0 +1,59 @@
+.card {
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+    height: 100%;
+    min-width: 24rem;
+    width: 75%;
+
+
+    &__text {
+        padding: 1rem;
+    }
+
+
+    &__side {
+        background-color: $color-white-card;
+        color: black;
+        font-size: 2rem;
+        overflow: hidden;
+        height: 40rem;
+        width: 100%;
+        transition: all .8s ease;
+        position: absolute;
+        top: 0;
+        left: 5rem;
+        backface-visibility: hidden;
+        box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.324);
+
+        &--front {
+            background-color: $color-white-card;
+            left: 50px;
+
+            &--pic {
+                height: 20rem;
+                background-image: url("../images/YelpCamp.png");
+                background-size: cover;
+                background-position: top;
+            }
+        }
+
+        &--back {
+            background-color: $color-white-card;
+            transform: rotateY(180deg);
+        }
+    }
+
+
+
+
+    &:hover &__side--front {
+        transform: rotateY(-180deg);
+
+    }
+
+    &:hover &__side--back {
+        transform: rotateY(0deg);
+
+    }
+
+}

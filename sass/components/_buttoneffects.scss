@@ -1,0 +1,51 @@
+.btn {
+
+    //raise on hover
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 2rem 2rem rgba(0, 0, 0, .3);
+    }
+
+    // move down on press
+    &:active {
+        transform: translateY(-1px);
+        box-shadow: 0 1rem 1rem rgba(0, 0, 0, .7);
+    }
+
+    // transition when page is loaded to float in from the bottom
+    &--slide-in {
+        animation: inFromBottom 1s ease-in .7s;
+        animation-fill-mode: backwards;
+        backface-visibility: hidden;
+    }
+
+}
+
+// create the splash/flash effect
+.btn--splash {
+    &:hover {
+
+        &::after {
+            animation: flash .4s;
+            animation-fill-mode: backwards;
+            backface-visibility: hidden;
+        }
+
+    }
+
+    &::after {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 5rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        transition: all .4s ease;
+        animation-fill-mode: backwards;
+        backface-visibility: hidden;
+    }
+
+}

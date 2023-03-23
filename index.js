@@ -1,7 +1,7 @@
 if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
+  require('dotenv').config();
 }
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 const express = require('express');
 const engine = require('ejs-mate');
 const app = express();
@@ -13,23 +13,19 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStategy = require('passport-local');
 const AppError = require('./utils/AppError');
-const User = require('./models/user')
-const mongoSanitize = require('express-mongo-sanitize')
-const helmet = require('helmet')
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelpCamp'
-
+const User = require('./models/user');
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelpCamp';
 
 const MongoStore = require('connect-mongo');
 
-
-
-
 // Starting the database
-main().catch(err => console.log(err));
+main().catch((err) => console.log(err));
 
 async function main() {
-    await mongoose.connect(dbUrl);
-    console.log('mongoose connected');
+  await mongoose.connect(dbUrl);
+  console.log('mongoose connected');
 }
 // routing paths
 app.use(express.static(path.join(__dirname, 'public')));
@@ -45,89 +41,91 @@ app.engine('ejs', engine);
 
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("seeds/pics"));
+app.use(express.static('seeds/pics'));
 // remove prohibited inputs from users
-app.use(mongoSanitize())
+app.use(mongoSanitize());
 
-const secret = process.env.SECRET || "thisisoffline"
+const secret = process.env.SECRET || 'thisisoffline';
 
-   const store = MongoStore.create({
-        mongoUrl: dbUrl,
-        touchAfter: 24 * 3600, // time period in seconds
-        crypto:{
-            secret
-        }
-    });
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  touchAfter: 24 * 3600, // time period in seconds
+  crypto: {
+    secret,
+  },
+});
 
 const sessionConfig = {
-    store,
-    name: '_sess',
-    secret,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        httpOnly: true,
-        // secure: true,
-        expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
-        maxAge: 1000 * 60 * 60 * 24 * 7
-    }
-// "https://cdn.jsdelivr.net"
-}
+  store,
+  name: '_sess',
+  secret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    // secure: true,
+    expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  },
+  // "https://cdn.jsdelivr.net"
+};
 app.use(session(sessionConfig));
 app.use(flash());
-app.use(helmet( {crossOriginEmbedderPolicy: false} ));
+app.use(helmet({ crossOriginEmbedderPolicy: false }));
 
 const scriptSrcUrls = [
-    
-    "https://stackpath.bootstrapcdn.com/",
-    "https://api.tiles.mapbox.com/",
-    "https://api.mapbox.com/",
-    "https://kit.fontawesome.com/",
-    "https://cdnjs.cloudflare.com/",
-    "https://cdn.jsdelivr.net/",
-    "https://res.cloudinary.com/dv5vm4sqh/"
+  'https://stackpath.bootstrapcdn.com/',
+  'https://api.tiles.mapbox.com/',
+  'https://api.mapbox.com/',
+  'https://kit.fontawesome.com/',
+  'https://cdnjs.cloudflare.com/',
+  'https://cdn.jsdelivr.net/',
+  'https://res.cloudinary.com/dv5vm4sqh/',
+  'https://astro-server-z1u9.onrender.com/traffic-data',
 ];
 const styleSrcUrls = [
-    "https://kit-free.fontawesome.com/",
-    "https://stackpath.bootstrapcdn.com/",
-    "https://api.mapbox.com/",
-    "https://api.tiles.mapbox.com/",
-    "https://fonts.googleapis.com/",
-    "https://use.fontawesome.com/",
-    "https://cdn.jsdelivr.net/",
-    "https://res.cloudinary.com/dv5vm4sqh/"
+  'https://kit-free.fontawesome.com/',
+  'https://stackpath.bootstrapcdn.com/',
+  'https://api.mapbox.com/',
+  'https://api.tiles.mapbox.com/',
+  'https://fonts.googleapis.com/',
+  'https://use.fontawesome.com/',
+  'https://cdn.jsdelivr.net/',
+  'https://res.cloudinary.com/dv5vm4sqh/',
 ];
 const connectSrcUrls = [
-    "https://*.tiles.mapbox.com",
-    "https://api.mapbox.com/",
-    "https://events.mapbox.com",
-    "https://res.cloudinary.com/dv5vm4sqh/"
+  'https://*.tiles.mapbox.com',
+  'https://api.mapbox.com/',
+  'https://events.mapbox.com',
+  'https://res.cloudinary.com/dv5vm4sqh/',
+  'https://astro-server-z1u9.onrender.com/traffic-data',
+  'https://api.ipify.org/',
 ];
-const fontSrcUrls = [ "https://res.cloudinary.com/tigys/" ];
- 
-app.use(
-    helmet.contentSecurityPolicy({
-        directives : {
-            defaultSrc : [],
-            connectSrc : [ "'self'", ...connectSrcUrls ],
-            scriptSrc  : [ "'unsafe-inline'", "'self'", ...scriptSrcUrls ],
-            styleSrc   : [ "'self'", "'unsafe-inline'", ...styleSrcUrls ],
-            workerSrc  : [ "'self'", "blob:" ],
-            objectSrc  : [],
-            imgSrc     : [
-                "'self'",
-                "blob:",
-                "data:",
-                "https://res.cloudinary.com/tigys/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
-                "https://images.unsplash.com/"
-            ],
-            fontSrc    : [ "'self'", ...fontSrcUrls ],
-            mediaSrc   : [ "https://res.cloudinary.com/dv5vm4sqh/" ],
-            childSrc   : [ "blob:" ]
-        }
-    })
-);
 
+const fontSrcUrls = ['https://res.cloudinary.com/tigys/'];
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: [],
+      connectSrc: ["'self'", ...connectSrcUrls],
+      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      workerSrc: ["'self'", 'blob:'],
+      objectSrc: [],
+      imgSrc: [
+        "'self'",
+        'blob:',
+        'data:',
+        'https://res.cloudinary.com/tigys/', //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
+        'https://images.unsplash.com/',
+      ],
+      fontSrc: ["'self'", ...fontSrcUrls],
+      mediaSrc: ['https://res.cloudinary.com/dv5vm4sqh/'],
+      childSrc: ['blob:'],
+    },
+  }),
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -137,44 +135,46 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-    if (!['/login', '/', '/logout', '/campgrounds/:id/edit', '/campgrounds/new', '/register'].includes(req.originalUrl)) {
-        req.session.returnTo = req.originalUrl;
-    }
-    res.locals.currentUser = req.user;
-    res.locals.success = req.flash('success');
-    res.locals.error = req.flash('error');
+  if (
+    ![
+      '/login',
+      '/',
+      '/logout',
+      '/campgrounds/:id/edit',
+      '/campgrounds/new',
+      '/register',
+    ].includes(req.originalUrl)
+  ) {
+    req.session.returnTo = req.originalUrl;
+  }
+  res.locals.currentUser = req.user;
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
 
-    next();
-})
-
-
-
-
+  next();
+});
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-
-app.use('/campgrounds', campgroundsRoutes)
-app.use('/campgrounds/:id/reviews', reviewsRoutes)
-app.use('/', userRoutes)
+app.use('/campgrounds', campgroundsRoutes);
+app.use('/campgrounds/:id/reviews', reviewsRoutes);
+app.use('/', userRoutes);
 
 app.get('/', (req, res) => {
-    res.render('home');
+  res.render('home');
 });
 
 app.all('*', (req, res, next) => {
-    next(new AppError('These are not the URL you are looking for.', 404))
-})
+  next(new AppError('These are not the URL you are looking for.', 404));
+});
 
 app.use((err, req, res, next) => {
-    const { status = 500 } = err;
-    if (!err.message) err.message = "Something went wrong!"
-    res.status(status).render('error', { err })
-
-})
-
+  const { status = 500 } = err;
+  if (!err.message) err.message = 'Something went wrong!';
+  res.status(status).render('error', { err });
+});
 
 app.listen(port, () => {
-    console.log(`Listening on ${port}`);
-})
+  console.log(`Listening on ${port}`);
+});

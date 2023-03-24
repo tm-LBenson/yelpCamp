@@ -1,5 +1,38 @@
 // analytics.js
-// ...
+const ONE_HOUR = 60 * 60 * 1000; // 1 hour in milliseconds
+
+const checkLastSent = () => {
+  const lastSent = localStorage.getItem('lastSent');
+  if (!lastSent) {
+    return true;
+  }
+
+  const currentTime = new Date().getTime();
+  const lastSentTime = new Date(lastSent).getTime();
+  return currentTime - lastSentTime > ONE_HOUR;
+};
+
+const updateLastSent = () => {
+  localStorage.setItem('lastSent', new Date().toISOString());
+};
+
+const getDeviceType = () => {
+  const userAgent = navigator.userAgent;
+  if (
+    /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)
+  ) {
+    return 'mobile';
+  } else if (/iPad/i.test(userAgent)) {
+    return 'tablet';
+  } else {
+    return 'desktop';
+  }
+};
+
+const getIpAddress = async () =>
+  await fetch('https://api.ipify.org?format=json')
+    .then((res) => res.json())
+    .then((data) => data.ip);
 
 window.analytics = async function analytics(siteName, clientId) {
   try {

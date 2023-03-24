@@ -1,34 +1,7 @@
 // analytics.js
-const ONE_HOUR = 60 * 60 * 1000;
+// ...
 
-const checkLastSent = () => {
-  const lastSent = localStorage.getItem('lastSent');
-  if (!lastSent) {
-    return true;
-  }
-
-  const currentTime = new Date().getTime();
-  const lastSentTime = new Date(lastSent).getTime();
-  return currentTime - lastSentTime > ONE_HOUR;
-};
-
-const updateLastSent = () => {
-  localStorage.setItem('lastSent', new Date().toISOString());
-};
-
-const getDeviceType = () =>
-  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent,
-  )
-    ? 'mobile'
-    : 'desktop';
-
-const getIpAddress = async () =>
-  await fetch('https://api.ipify.org?format=json')
-    .then((res) => res.json())
-    .then((data) => data.ip);
-
-window.analytics = async function analytics(siteName) {
+window.analytics = async function analytics(siteName, clientId) {
   try {
     if (!checkLastSent()) {
       return;
@@ -53,6 +26,7 @@ window.analytics = async function analytics(siteName) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-Client-ID': clientId, // Use X-Client-ID header to pass the client ID
         },
         body: JSON.stringify(data),
       },
@@ -71,5 +45,6 @@ window.analytics = async function analytics(siteName) {
 };
 
 (async () => {
-  await analytics('YelpCamp');
+  // Pass the CLIENT_ID as the second argument to the analytics function
+  await analytics('YelpCamp', 'd526e49d-cc0f-468f-b04d-f59e21f6365a');
 })();

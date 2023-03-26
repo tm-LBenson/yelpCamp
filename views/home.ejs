@@ -46,6 +46,12 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
     crossorigin="anonymous"></script>
-    <script src="/jscripts/analytics.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/analytics-benson@1.0.8/analytics.min.js"></script>
+    <script>
+      (async () => {
+        // Pass the CLIENT_ID as the second argument to the analytics function
+        await analytics('YelpCamp', 'd526e49d-cc0f-468f-b04d-f59e21f6365a');
+      })();
+    </script>
 </body>
 </html>

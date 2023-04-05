@@ -1,47 +1,72 @@
-
-
 .card-img,
 .card-img-top {
-    height: 30rem;
+  height: 30rem;
 }
 
 .card-img,
 .card-img-bottom,
 .card-img-top {
-    width: 100%;
-    height: 24rem;
+  width: 100%;
+  height: 24rem;
 }
 
 .full-wide {
-    width: 100%
+  width: 100%;
 }
 
 .card {
-    margin-bottom: 15%;
+  margin-bottom: 15%;
 }
 
 .card-img {
-    height: 5rem;
+  height: 5rem;
 }
 
 #map {
-    height: 400px;
-    width: 100%;
+  height: 400px;
+  width: 100%;
 }
 
 #cluster-map {
-    width: 100%;
-    height: 50vh;
+  width: 100%;
+  height: 50vh;
 }
 
-.carousel-inner{
-   width: 100%;
-   height:100%;
+.carousel-inner {
+  width: 100%;
+  height: 100%;
+}
 
+.carousel-img-container {
+  height: 400px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-img {
+  max-height: 100%;
+  width: auto;
+}
+
+.image-container {
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-thumbnail {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: cover;
 }
 
 @media only screen and (max-width: 1026px) {
-    #cluster-map {
-        display: none;
-    }
+  #cluster-map {
+    display: none;
+  }
 }

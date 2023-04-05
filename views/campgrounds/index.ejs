@@ -30,9 +30,15 @@
             <div class="row">
                 <div class="col-md-4">
                     <% if(campground.image.length) {%> 
-                    <img class="img-fluid" alt="" src=<%=campground.image[0].url %> >
+                        <div class="image-container">
+                            <img class="img-fluid image-thumbnail" alt="" src=<%=campground.image[0].url %> >
+                          </div>
+                          
                         <% }else{ %> 
-                            <img class="img-fluid" alt="" src="https://images.unsplash.com/photo-1501697372968-40fa90cd1da3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NjR8NDgzMjUxfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" >
+                            <div class="image-container">
+                                <img class="img-fluid image-thumbnail" alt="" src="https://images.unsplash.com/photo-1501697372968-40fa90cd1da3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NjR8NDgzMjUxfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" >
+                              </div>
+                              
                             <% } %> 
                 </div>
                 <div class="col-md-8">

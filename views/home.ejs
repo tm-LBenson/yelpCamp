@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="stylesheets/home.css">
-   
+
     <title>YelpCamp</title>
 
 </head>
@@ -16,17 +16,17 @@
             <div>
                 <h3 class="float-md-start mb-0">YelpCamp</h3>
                 <nav class="nav justify-content-center float-md-end">
-                   
+
                     <a class="nav-link active" aria-current="page" href="#" >Home</a>
 
                     <a class="nav-link" href="/campgrounds" >Campgrounds</a>
-                    <% if(!currentUser){ %> 
+                    <% if(!currentUser){ %>
                     <a class="nav-link" href="/login" >Login</a>
                     <a class="nav-link" href="/register" >Register</a>
-                    <% }else{ %> 
+                    <% }else{ %>
                     <a class="nav-link" href="/logout" >Logout</a>
-                    <% } %> 
-                    
+                    <% } %>
+
                 </nav>
             </div>
         </header>
@@ -46,7 +46,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
     crossorigin="anonymous"></script>
-     <script src="https://cdn.jsdelivr.net/npm/analytics-benson@1.0.8/analytics.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/analytics-benson@3.1.2/analytics.min.js"></script>
     <script>
       (async () => {
         // Pass the CLIENT_ID as the second argument to the analytics function

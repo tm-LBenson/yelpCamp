@@ -2,9 +2,6 @@
 
 YelpCamp is a full-stack web application for sharing and discovering campgrounds. Users can create, edit, and delete campgrounds, leave reviews, and explore campgrounds added by others. The application is built with Node.js, Express, MongoDB, and utilizes various middleware and libraries.
 
-[Live Demo](https://yelp-camp-lewis.cyclic.app/):  
-https://yelp-camp-lewis.cyclic.app/
-
 ## Features
 
 - User registration and authentication
